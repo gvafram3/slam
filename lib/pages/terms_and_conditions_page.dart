@@ -12,7 +12,7 @@ class TermsAndConditions extends StatelessWidget {
           title: const Text('Material App Bar'),
         ),
         body: const Center(
-          child: Text('Terms and conditions'),
+          child: Text('Terms and conditions here'),
         ),
       ),
     );
