@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget greyBackgroundImage({required Widget mainWidget}) {
   return Scaffold(
+    resizeToAvoidBottomInset: false,
     body: Stack(
       children: [
         Container(

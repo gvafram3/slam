@@ -15,6 +15,9 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   bool _isChecked = false;
+  bool emptyController = true;
+  bool isClearToSubmit = false;
+  final TextEditingController forgotPassController = TextEditingController();
 
   // void _showCheckboxMessage(BuildContext context) {
   //   ScaffoldMessenger.of(context).showSnackBar(
@@ -23,6 +26,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   //     ),
   //   );
   // }
+
+  @override
+  void dispose() {
+    forgotPassController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +47,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Forgot Password?',
-                  style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold),
+                const Center(
+                  child: Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                        color: Colors.orange,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Center(
                   child: SizedBox(
@@ -61,8 +72,31 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   style: TextStyle(color: Colors.black, fontSize: 14),
                 ),
                 SizedBox(height: size.height * 0.0341),
-                const CustomTextField(
-                  hintText: 'Enter your email here',
+                CustomTextField(
+                  onChanged: (txt) {
+                    if (_isChecked & txt.isNotEmpty) {
+                      setState(() {
+                        isClearToSubmit = true;
+                      });
+                    }
+                    if (_isChecked & txt.isEmpty) {
+                      setState(() {
+                        isClearToSubmit = false;
+                      });
+                    }
+                    if (txt.isNotEmpty) {
+                      setState(() {
+                        emptyController = false;
+                      });
+                    }
+                    if (txt.isEmpty) {
+                      setState(() {
+                        emptyController = true;
+                      });
+                    }
+                  },
+                  controller: forgotPassController,
+                  hintText: 'Enter your email',
                   isPassword: false,
                   prefixIcon: Icons.email_outlined,
                 ),
@@ -76,6 +110,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           setState(() {
                             _isChecked = newValue ?? false;
                           });
+                          if (!emptyController & _isChecked) {
+                            setState(() {
+                              isClearToSubmit = true;
+                            });
+                          }
+                          if (!emptyController & !_isChecked) {
+                            setState(() {
+                              isClearToSubmit = false;
+                            });
+                          }
                         }),
                     GestureDetector(
                       onTap: () {
@@ -93,7 +137,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w100)),
+                                    fontWeight: FontWeight.bold)),
                             TextSpan(
                                 text: 'terms and conditions. ',
                                 style: TextStyle(
@@ -116,13 +160,18 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
                 SizedBox(height: size.height * 0.0341),
                 CustomElevatedButton(
-                  onPressed: () {},
+                  onPressed: isClearToSubmit
+                      ? () {
+                          debugPrint(forgotPassController.text);
+                        }
+                      : () {},
                   //  _isChecked
                   //     ? () {}
                   //     : () {
                   //         _showCheckboxMessage(context);
                   //       },
-                  backgroundColor: _isChecked ? Colors.orange : Colors.grey,
+                  backgroundColor:
+                      isClearToSubmit ? Colors.orange : Colors.grey.shade300,
                   label: 'Verify Email',
                 ),
                 SizedBox(height: size.height * 0.017),
