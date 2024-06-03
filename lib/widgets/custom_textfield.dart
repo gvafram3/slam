@@ -4,12 +4,16 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword;
   final IconData prefixIcon;
   final String hintText;
+  final TextEditingController controller;
+  final void Function(String txt)? onChanged;
 
   const CustomTextField({
     super.key,
     required this.isPassword,
     required this.prefixIcon,
     required this.hintText,
+    required this.controller,
+    this.onChanged,
   });
 
   @override
@@ -24,15 +28,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
     // final size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: 45,
+      height: 55,
       width: double.infinity,
       child: TextField(
+        onChanged: widget.onChanged,
         obscuringCharacter: '*',
         obscureText: widget.isPassword ? _obscureText : false,
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 10.0,
-              vertical: 8.0,
+              vertical: 15.0,
             ),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.orange, width: 2.0),

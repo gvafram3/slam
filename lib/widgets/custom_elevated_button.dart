@@ -1,32 +1,37 @@
 import 'package:flutter/material.dart';
 
-class CustomElevatedButton extends StatelessWidget {
+class CustomElevatedButton extends StatefulWidget {
   final String label;
-  final Function onPressed;
+  final Function() onPressed;
   final Color backgroundColor;
 
   const CustomElevatedButton({
     super.key,
     required this.label,
     required this.onPressed,
-    required this.backgroundColor,
+    this.backgroundColor = Colors.orange,
   });
 
+  @override
+  State<CustomElevatedButton> createState() => _CustomElevatedButtonState();
+}
+
+class _CustomElevatedButtonState extends State<CustomElevatedButton> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: size.height * 0.0682,
+      height: size.height * 0.0582,
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: widget.backgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        onPressed: () {},
+        onPressed: widget.onPressed,
         // Navigator.push(
         //           context,
         //           MaterialPageRoute(
@@ -35,11 +40,11 @@ class CustomElevatedButton extends StatelessWidget {
         //         ), child: null,
         // ),
         child: Text(
-          label,
+          widget.label,
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 18,
+            fontSize: 22,
           ),
         ),
       ),
