@@ -13,7 +13,7 @@ Widget availableBusesCard(context,
       // height: size.height * 0.227,
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.all(size.height * 0.027),
+        padding: EdgeInsets.all(size.height * 0.017),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ Widget availableBusesCard(context,
                     ),
                   ],
                 ),
-                SizedBox(width: size.height * 0.066),
+                SizedBox(width: size.height * 0.026),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -66,7 +66,7 @@ Widget availableBusesCard(context,
                     ),
                   ],
                 ),
-                SizedBox(width: size.height * 0.076),
+                SizedBox(width: size.height * 0.026),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

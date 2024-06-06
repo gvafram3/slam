@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget greyBackgroundImage({required Widget mainWidget}) {
+Widget greyBackgroundImage({required Widget mainWidget, bottomnavigationbar}) {
   return Scaffold(
     resizeToAvoidBottomInset: false,
     body: Stack(
