@@ -113,48 +113,37 @@ class WelcomePage extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          // color: Colors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const GNav(
-                    color: Colors.grey,
-                    activeColor: Colors.blue,
-                    gap: 8,
-                    tabs: [
-                      GButton(
-                        icon: Icons.home,
-                        text: 'Home',
-                      ),
-                      GButton(
-                        icon: Icons.star,
-                        text: 'Likes',
-                      ),
-                      GButton(
-                        icon: Icons.search,
-                        text: 'Search',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              IconButton(
-                icon: const Icon(Icons.emergency_outlined),
-                onPressed: () {
-                  // Add your onPressed code here!
-                },
-              ),
-            ],
-          ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.red.shade800,
+          onPressed: () {},
+          child: const Icon(Icons.emergency, color: Colors.white60),
         ),
+        bottomNavigationBar: const GNav(
+          color: Colors.grey,
+          activeColor: Colors.blue,
+          gap: 8,
+          tabs: [
+            GButton(
+              icon: Icons.home,
+              text: 'Home',
+            ),
+            GButton(
+              icon: Icons.star,
+              text: 'Likes',
+            ),
+            GButton(
+              icon: Icons.search,
+              text: 'Search',
+            ),
+          ],
+        ),
+        // const SizedBox(width: 12),
+        // IconButton(
+        //   icon: const Icon(Icons.emergency_outlined),
+        //   onPressed: () {
+        //     // Add your onPressed code here!
+        //   },
+        // ),
       ),
     );
   }

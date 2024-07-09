@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slam/pages/admin_dashboard.dart';
 import 'package:slam/pages/forgot_password.dart';
 // import 'package:slam/widgets/custom_elevated_button.dart';
 
@@ -144,6 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const WelcomePage()),
+                        // AdminDashboard()),
                       );
                     },
                     child: const Text(
