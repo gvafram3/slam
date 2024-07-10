@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pages/admin_dashboard.dart';
+// import 'pages/admin/admin_dashboard.dart';
 import 'pages/splash_screen.dart';
 // import 'pages/welcome_page.dart';
 
@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Final year project',
-      home: AdminDashboard(),
-      // SplashScreen(),
+      home: SplashScreen(),
+      // AdminDashboard(),
     );
   }
 }

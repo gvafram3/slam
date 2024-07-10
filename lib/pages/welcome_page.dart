@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:slam/widgets/available_buses.dart';
 import 'package:slam/widgets/grey_background.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
+
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  GoogleMapController? _controller;
+
+  static const CameraPosition _initialPosition = CameraPosition(
+    target: LatLng(37.7749, -122.4194),
+    zoom: 10,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +67,21 @@ class WelcomePage extends StatelessWidget {
                 SizedBox(height: size.height * 0.017),
                 Center(
                   child: Container(
-                    height: size.height * 0.36,
-                    width: size.height * 0.63,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      image: const DecorationImage(
-                          image: AssetImage('assets/images/Live-Map.png'),
-                          fit: BoxFit.fill),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                  ),
+                      height: size.height * 0.36,
+                      width: size.height * 0.63,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        // image: const DecorationImage(
+                        //     image: AssetImage('assets/images/Live-Map.png'),
+                        //     fit: BoxFit.fill),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: GoogleMap(
+                        initialCameraPosition: _initialPosition,
+                        onMapCreated: (GoogleMapController controller) {
+                          _controller = controller;
+                        },
+                      )),
                 ),
                 const Text(
                   'Available Buses',
@@ -124,16 +142,16 @@ class WelcomePage extends StatelessWidget {
           gap: 8,
           tabs: [
             GButton(
-              icon: Icons.home,
-              text: 'Home',
+              icon: Icons.directions_bus_outlined,
+              text: 'Track Bus',
             ),
             GButton(
-              icon: Icons.star,
-              text: 'Likes',
+              icon: Icons.message,
+              text: 'Reports',
             ),
             GButton(
-              icon: Icons.search,
-              text: 'Search',
+              icon: Icons.person,
+              text: 'Profile',
             ),
           ],
         ),

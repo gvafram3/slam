@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:slam/pages/admin_dashboard.dart';
+// import 'package:slam/pages/admin_dashboard.dart';
 import 'package:slam/pages/forgot_password.dart';
-// import 'package:slam/widgets/custom_elevated_button.dart';
 
 import '../widgets/blue_background.dart';
 import '../widgets/custom_textfield.dart';
@@ -117,16 +116,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                // TextButton(
-                //   onPressed: () {
-                //     // TO-DO
-                //     // Navigate to Forgot Password page
-                //   },
-                //   child: const Text(
-                //     'Forgot Password',
-                //     style: TextStyle(color: Colors.orange, fontSize: 14),
-                //   ),
-                // ),
                 SizedBox(height: size.height * 0.0341),
 
                 SizedBox(
@@ -140,12 +129,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     onPressed: () {
-                      // print('Login button pressed');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const WelcomePage()),
-                        // AdminDashboard()),
                       );
                     },
                     child: const Text(
@@ -158,19 +145,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-
-                // CustomElevatedButton(
-                //   onPressed: () {
-                //     print('Login button pressed');
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //           builder: (context) => const WelcomePage()),
-                //     );
-                //   },
-                //   label: 'Login',
-                //   backgroundColor: Colors.orange,
-                // ),
               ]),
         ),
       ),
