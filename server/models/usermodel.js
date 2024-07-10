@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please name is required field"],
+    required: [true, "Name is a required field"],
   },
   email: {
     type: String,
@@ -14,38 +15,48 @@ const userSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    required: [true, "Please username is required"],
+    required: [true, "Username is required"],
     unique: true,
   },
   password: {
     type: String,
-    required: [true, "Please password is a required"],
-    minlegth: 8,
+    required: [true, "Password is required"],
+    minlength: 8,
     select: false,
   },
   currentHostel: {
     type: String,
+    default: undefined,
   },
   photo: {
     type: String,
-    required: [true, "Please photo of user is a required field"],
+    required: [true, "Photo of user is a required field"],
   },
   phoneNumber: {
-    type: Number,
-    required: [true, "Please a user must have password"],
+    type: String,
+    required: [true, "Phone number is required"],
+    validate: {
+      validator: function (v) {
+        return /\d{10,15}/.test(v);
+      },
+      message: (props) => `${props.value} is not a valid phone number!`,
+    },
   },
   referenceNumber: {
-    type: Number,
-    required: [true, "Please refrence number is a required field"],
-  },
-  MotherName: {
     type: String,
+    required: [true, "Reference number is a required field"],
+  },
+  motherName: {
+    type: String,
+    default: undefined,
   },
   fatherName: {
     type: String,
+    default: undefined,
   },
   guideanContact: {
-    type: Number,
+    type: String,
+    default: undefined,
   },
   gender: {
     type: String,
@@ -58,18 +69,19 @@ const userSchema = new mongoose.Schema({
   },
   bDay: {
     type: Number,
-    required: [true, "Please provide day "],
+    required: [true, "Please provide day"],
   },
   bMonth: {
     type: Number,
-    required: [true, "Please provide Month"],
+    required: [true, "Please provide month"],
   },
   birthCert: {
     type: String,
-    required: [true, "Please a scanned copy of birth certificate is required"],
+    required: [true, "A scanned copy of birth certificate is required"],
   },
   homeTown: {
     type: String,
+    default: undefined,
   },
   criminalRecords: {
     type: String,
@@ -86,10 +98,13 @@ const userSchema = new mongoose.Schema({
   },
   otherRecords: {
     type: String,
+    default: undefined,
   },
   descriptor: {
     type: Buffer,
+    required: true,
   },
 });
+
 const User = mongoose.model("User", userSchema);
 module.exports = User;

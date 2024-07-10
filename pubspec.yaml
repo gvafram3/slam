@@ -39,6 +39,7 @@ dependencies:
   charts_flutter: ^0.12.0
   google_fonts: ^5.0.0
   google_maps_flutter: ^2.6.1
+  http: ^1.2.1
  
 
 dev_dependencies:

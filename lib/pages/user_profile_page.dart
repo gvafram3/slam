@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 // import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  ProfilePageState createState() => ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
-  int _currentIndex = 2;
+class ProfilePageState extends State<ProfilePage> {
+  // final int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {},
         ),
       ),
@@ -25,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Center(
+            const Center(
               child: Column(
                 children: [
                   CircleAvatar(
@@ -42,12 +44,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     ProfileDetailRow(
@@ -74,15 +76,16 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             ElevatedButton.icon(
               onPressed: () {},
-              icon: Icon(Icons.logout),
-              label: Text('Log Out'),
+              icon: const Icon(Icons.logout),
+              label: const Text('Log Out'),
               style: ElevatedButton.styleFrom(
                 // primary: Colors.red,
                 // onPrimary: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -127,7 +130,10 @@ class ProfileDetailRow extends StatelessWidget {
   final String value;
 
   const ProfileDetailRow(
-      {required this.icon, required this.title, required this.value});
+      {super.key,
+      required this.icon,
+      required this.title,
+      required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -136,11 +142,12 @@ class ProfileDetailRow extends StatelessWidget {
       child: Row(
         children: [
           Icon(icon, color: Colors.blue),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(title,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          Spacer(),
-          Text(value, style: TextStyle(fontSize: 16)),
+              style:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const Spacer(),
+          Text(value, style: const TextStyle(fontSize: 16)),
         ],
       ),
     );

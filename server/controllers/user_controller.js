@@ -1,23 +1,23 @@
 const User = require("../models/usermodel");
-const Catchsync = require("../utils/catchsync");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
-// exports.createUser = (req, res) => {
-//   const { username, password, hostel, lastLocation } = req.body;
-// };
+// Middleware to check roles
+const checkRole = (roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError("You do not have permission to perform this action", 403)
+      );
+    }
+    next();
+  };
+};
 
-exports.getAllUser = Catchsync(async (req, res) => {
-  const users = await User.find();
-
-  res.status(200).json({
-    status: "success",
-    resultLength: users,
-    data: {
-      users,
-    },
-  });
-});
-
-exports.createUser = Catchsync((req, res) => {
+// Create user
+exports.createUser = catchAsync(async (req, res, next) => {
   const {
     name,
     username,
@@ -41,28 +41,139 @@ exports.createUser = Catchsync((req, res) => {
     photo,
     birthCert,
   } = req.body;
-  const newUser = new User({
+
+  const newUser = await User.create({
     name,
-    email,
     username,
+    phoneNumber,
     password,
-    photo,
+    bYear,
+    bDay,
+    bMonth,
     gender,
     fatherName,
     motherName,
+    guideanContact: parentPhone,
     referenceNumber,
-    bDay,
-    bMonth,
-    bYear,
-    descriptor,
-    phoneNumber,
     homeTown,
     criminalRecords,
     role,
     otherRecords,
     shsAttended,
+    email,
     currentHostel,
+    photo,
     birthCert,
-    quideanContact: parentPhone,
-  }).save();
+  });
+
+  res.status(201).json({
+    status: "success",
+    data: {
+      user: newUser,
+    },
+  });
+});
+
+// Get all users (admin only)
+exports.getAllUsers = [
+  checkRole(["admin"]),
+  catchAsync(async (req, res, next) => {
+    const users = await User.find();
+    res.status(200).json({
+      status: "success",
+      results: users.length,
+      data: {
+        users,
+      },
+    });
+  }),
+];
+
+// Get single user by ID or name (admin only)
+exports.getUser = [
+  checkRole(["admin"]),
+  catchAsync(async (req, res, next) => {
+    const query = req.params.idOrName.match(/^[0-9a-fA-F]{24}$/)
+      ? { _id: req.params.idOrName }
+      : { name: req.params.idOrName };
+    const user = await User.findOne(query);
+
+    if (!user) {
+      return next(new AppError("No user found with that ID or name", 404));
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        user,
+      },
+    });
+  }),
+];
+
+// Update user (admin only)
+exports.updateUser = [
+  checkRole(["admin"]),
+  catchAsync(async (req, res, next) => {
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedUser) {
+      return next(new AppError("No user found with that ID", 404));
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        user: updatedUser,
+      },
+    });
+  }),
+];
+
+// Delete user (admin only)
+exports.deleteUser = [
+  checkRole(["admin"]),
+  catchAsync(async (req, res, next) => {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) {
+      return next(new AppError("No user found with that ID", 404));
+    }
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  }),
+];
+
+// User login
+exports.login = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return next(new AppError("Please provide email and password", 400));
+  }
+
+  const user = await User.findOne({ email }).select("+password");
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return next(new AppError("Incorrect email or password", 401));
+  }
+
+  const token = jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    }
+  );
+
+  res.status(200).json({
+    status: "success",
+    token,
+    data: {
+      user,
+    },
+  });
 });
