@@ -3,6 +3,8 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+// Assuming you use a library to generate descriptors
+const { getDescriptorFromImage } = require("../utils/facialRecognitionUtils");
 
 // Middleware to check roles
 const checkRole = (roles) => {
@@ -42,6 +44,9 @@ exports.createUser = catchAsync(async (req, res, next) => {
     birthCert,
   } = req.body;
 
+  // Generate descriptor from the provided photo
+  const descriptor = await getDescriptorFromImage(photo);
+
   const newUser = await User.create({
     name,
     username,
@@ -64,6 +69,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
     currentHostel,
     photo,
     birthCert,
+    descriptor, // Add the descriptor to the new user object
   });
 
   res.status(201).json({

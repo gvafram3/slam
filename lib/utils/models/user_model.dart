@@ -7,7 +7,7 @@ class UserModel {
   final String email;
   final String photo;
   final int bDay;
-  final String currenHostel;
+  final String currentHostel;
   final int bYear;
   final int bMonth;
   final String gender;
@@ -23,13 +23,14 @@ class UserModel {
   final String role;
   final String otherRecords;
   final String shsAttended;
+
   UserModel({
     required this.username,
     required this.password,
     required this.email,
     required this.photo,
     required this.bDay,
-    required this.currenHostel,
+    required this.currentHostel,
     required this.bYear,
     required this.bMonth,
     required this.gender,
@@ -54,7 +55,7 @@ class UserModel {
       'email': email,
       'photo': photo,
       'bDay': bDay,
-      'currenHostel': currenHostel,
+      'currentHostel': currentHostel,
       'bYear': bYear,
       'bMonth': bMonth,
       'gender': gender,
@@ -80,7 +81,7 @@ class UserModel {
       email: map['email'] as String,
       photo: map['photo'] as String,
       bDay: map['bDay'] as int,
-      currenHostel: map['currenHostel'] as String,
+      currentHostel: map['currentHostel'] as String,
       bYear: map['bYear'] as int,
       bMonth: map['bMonth'] as int,
       gender: map['gender'] as String,
