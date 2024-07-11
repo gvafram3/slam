@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:slam/widgets/available_buses.dart';
 import 'package:slam/widgets/grey_background.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -23,145 +22,105 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Track Bus',
-      home: Scaffold(
-        body: greyBackgroundImage(
-          mainWidget: Padding(
-            padding: EdgeInsets.all(size.height * 0.034),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return greyBackgroundImage(
+      mainWidget: Padding(
+        padding: EdgeInsets.all(size.height * 0.034),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Welcome, Visca!',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                    CircleAvatar(
-                      radius: size.height * 0.04,
-                      backgroundImage: const AssetImage(
-                        'assets/images/visca.jpg',
-                      ),
-                    )
-                  ],
-                ),
                 const Text(
-                  'Track your bus effectively',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.blue),
+                  'Welcome, Visca!',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
-                const Text(
-                  'Your destination, our priority. \nHit the panic button in case you have an emergency!',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                CircleAvatar(
+                  radius: size.height * 0.04,
+                  backgroundImage: const AssetImage(
+                    'assets/images/visca.jpg',
                   ),
-                ),
-                SizedBox(height: size.height * 0.017),
-                Center(
-                  child: Container(
-                      height: size.height * 0.36,
-                      width: size.height * 0.63,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        // image: const DecorationImage(
-                        //     image: AssetImage('assets/images/Live-Map.png'),
-                        //     fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: GoogleMap(
-                        initialCameraPosition: _initialPosition,
-                        onMapCreated: (GoogleMapController controller) {
-                          _controller = controller;
-                        },
-                      )),
-                ),
-                const Text(
-                  'Available Buses',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.blue),
-                ),
-                Expanded(
-                  child: Container(
-                    color: Colors.grey.shade300,
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: EdgeInsets.all(size.height * 0.024),
-                        child: Column(
-                          children: [
-                            availableBusesCard(context,
-                                route: 'Commercial Area - KSB',
-                                busNo: 'GS-000-345',
-                                nextStop: 'Casely Hayford',
-                                arrivalTime: '5 mins'),
-                            const SizedBox(height: 12),
-                            availableBusesCard(context,
-                                route: 'Commercial Area - KSB',
-                                busNo: 'GS-000-345',
-                                nextStop: 'Casely Hayford',
-                                arrivalTime: '5 mins'),
-                            const SizedBox(height: 12),
-                            availableBusesCard(context,
-                                route: 'Commercial Area - KSB',
-                                busNo: 'GS-000-345',
-                                nextStop: 'Casely Hayford',
-                                arrivalTime: '5 mins'),
-                            const SizedBox(height: 12),
-                            availableBusesCard(context,
-                                route: 'Commercial Area - KSB',
-                                busNo: 'GS-000-345',
-                                nextStop: 'Casely Hayford',
-                                arrivalTime: '5 mins'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                )
               ],
             ),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.red.shade800,
-          onPressed: () {},
-          child: const Icon(Icons.emergency, color: Colors.white60),
-        ),
-        bottomNavigationBar: const GNav(
-          color: Colors.grey,
-          activeColor: Colors.blue,
-          gap: 8,
-          tabs: [
-            GButton(
-              icon: Icons.directions_bus_outlined,
-              text: 'Track Bus',
+            const Text(
+              'Track your bus effectively',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.blue),
             ),
-            GButton(
-              icon: Icons.message,
-              text: 'Reports',
+            const Text(
+              'Your destination, our priority. \nHit the panic button in case you have an emergency!',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
-            GButton(
-              icon: Icons.person,
-              text: 'Profile',
+            SizedBox(height: size.height * 0.017),
+            Center(
+              child: Container(
+                height: size.height * 0.36,
+                width: size.height * 0.63,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: GoogleMap(
+                  initialCameraPosition: _initialPosition,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller = controller;
+                  },
+                ),
+              ),
+            ),
+            const Text(
+              'Available Buses',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.blue),
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.grey.shade300,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(size.height * 0.024),
+                    child: Column(
+                      children: [
+                        availableBusesCard(context,
+                            route: 'Commercial Area - KSB',
+                            busNo: 'GS-000-345',
+                            nextStop: 'Casely Hayford',
+                            arrivalTime: '5 mins'),
+                        const SizedBox(height: 12),
+                        availableBusesCard(context,
+                            route: 'Commercial Area - KSB',
+                            busNo: 'GS-000-345',
+                            nextStop: 'Casely Hayford',
+                            arrivalTime: '5 mins'),
+                        const SizedBox(height: 12),
+                        availableBusesCard(context,
+                            route: 'Commercial Area - KSB',
+                            busNo: 'GS-000-345',
+                            nextStop: 'Casely Hayford',
+                            arrivalTime: '5 mins'),
+                        const SizedBox(height: 12),
+                        availableBusesCard(context,
+                            route: 'Commercial Area - KSB',
+                            busNo: 'GS-000-345',
+                            nextStop: 'Casely Hayford',
+                            arrivalTime: '5 mins'),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
-        // const SizedBox(width: 12),
-        // IconButton(
-        //   icon: const Icon(Icons.emergency_outlined),
-        //   onPressed: () {
-        //     // Add your onPressed code here!
-        //   },
-        // ),
       ),
     );
   }

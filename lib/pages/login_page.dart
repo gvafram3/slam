@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'package:slam/pages/admin_dashboard.dart';
 import 'package:slam/pages/forgot_password.dart';
-
 import '../widgets/blue_background.dart';
 import '../widgets/custom_textfield.dart';
-import 'welcome_page.dart';
+import '../bottom_navigation_bar/bottom_nav_bar.dart'; // Updated import
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -47,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
                   'Kindly enter your details to login',
                   style: TextStyle(color: Colors.white, fontSize: 17),
                 ),
-                // SizedBox(height: 12),
                 RichText(
                   text: TextSpan(
                     children: [
@@ -115,9 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-
                 SizedBox(height: size.height * 0.0341),
-
                 SizedBox(
                   height: size.height * 0.0682,
                   width: double.infinity,
@@ -132,7 +128,8 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const WelcomePage()),
+                            builder: (context) =>
+                                const MyBottomNavBar()), // Updated navigation
                       );
                     },
                     child: const Text(
