@@ -39,6 +39,9 @@ dependencies:
   google_fonts: ^5.0.0
   google_maps_flutter: ^2.6.1
   http: ^1.2.1
+  iconly: ^1.0.1
+  swipeable_button_flutter: ^0.0.3
+  slide_to_act: ^2.0.2
 
 dev_dependencies:
   flutter_test:
