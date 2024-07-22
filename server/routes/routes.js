@@ -20,4 +20,6 @@ router
 
 router.post("/login", userController.login);
 
+router.post("/createUser", userController.uploadPhoto, userController.createUser);
+router.post("/recognizeFace", userController.uploadPhoto, userController.recognizeFace);
 module.exports = router;
