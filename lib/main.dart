@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-// import 'pages/admin/admin_dashboard.dart';
-import 'app_theme.dart';
+import 'admin_dashboard/controllers/MenuAppController.dart';
+// import 'admin_dashboard/screens/main/main_screen.dart';
+// import 'app_theme.dart';
 import 'pages/splash_screen.dart';
-import 'pages/welcome_page.dart';
+import 'utils/constants.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,13 +16,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: appTheme,
+      // theme: appTheme,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: bgColor,
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+            .apply(bodyColor: Colors.white),
+        canvasColor: secondaryColor,
+      ),
       debugShowCheckedModeBanner: false,
-      title: 'Final year project',
-      home: const SplashScreen(),
-      // MapScreen(),
-      // WelcomePage(),
-      // AdminDashboard(),
+      title: 'SLAM',
+
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => MenuAppController(),
+          ),
+        ],
+        child: SplashScreen(),
+        //  MainScreen(),
+      ),
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:slam/pages/confirm_panic_mode_screen.dart';
-import 'package:slam/pages/user_profile_page.dart';
+import 'package:slam/bottom_navigation_bar/user_profile_page.dart';
 
-import '../pages/report_screen.dart';
+import 'report_screen.dart';
 
-import '../pages/welcome_page.dart';
+import 'welcome_page.dart';
 import 'package:iconly/iconly.dart';
 
 class MyBottomNavBar extends StatefulWidget {
@@ -28,7 +28,7 @@ class _MyButtomNavBarState extends State<MyBottomNavBar> {
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: Container(
-        margin: const EdgeInsets.fromLTRB(20, 20, 95, 16),
+        margin: const EdgeInsets.fromLTRB(20, 0, 95, 8),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -74,7 +74,7 @@ class _MyButtomNavBarState extends State<MyBottomNavBar> {
           pages[myCurrentIndex],
           Positioned(
             right: 20,
-            bottom: 16,
+            bottom: 8,
             child: CircleAvatar(
               backgroundColor: Colors.red[600],
               radius: 30,

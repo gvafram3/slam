@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../bottom_navigation_bar/bottom_nav_bar.dart';
 import '../pages/chat_screen.dart';
-import '../pages/welcome_page.dart';
+import '../bottom_navigation_bar/welcome_page.dart';
 
 class ReportDialog extends StatelessWidget {
   final TextEditingController _reportController = TextEditingController();
