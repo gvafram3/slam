@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'admin_dashboard/controllers/MenuAppController.dart';
 // import 'admin_dashboard/screens/main/main_screen.dart';
 // import 'app_theme.dart';
+import 'admin_dashboard/screens/main/main_screen.dart';
 import 'pages/splash_screen.dart';
 import 'utils/constants.dart';
 
@@ -32,8 +33,8 @@ class MyApp extends StatelessWidget {
             create: (context) => MenuAppController(),
           ),
         ],
-        child: SplashScreen(),
-        //  MainScreen(),
+        child: MainScreen(),
+        // SplashScreen(),
       ),
     );
   }
