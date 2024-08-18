@@ -1,9 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/widgets.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomeFragment extends StatelessWidget {
+  const HomeFragment({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -12,7 +18,9 @@ class HomeFragment extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
+              Container(
+                color: Colors.transparent,
+                width: size.width * 0.6,
                 child: Column(
                   children: [
                     Row(
@@ -25,6 +33,122 @@ class HomeFragment extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     _buildPerformanceChart(),
+                    Card(
+                        elevation: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Active SOS Alerts'),
+                            ),
+                            Row(
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                      height: 300,
+                                      width: 600,
+                                      child: GoogleMapWidget()),
+                                ),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      height: 80,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.blue[800],
+                                      ),
+                                      child: const Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text('On campus',
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'SOS alerts',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                Text(
+                                                  '- 6 active',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 55,
+                                    ),
+                                    Container(
+                                      height: 80,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.blue[800],
+                                      ),
+                                      child: const Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Text('Off-campus',
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'SOS alerts',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                Text(
+                                                  '- 6 active',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        )),
                   ],
                 ),
               ),
@@ -47,6 +171,7 @@ class HomeFragment extends StatelessWidget {
 
   Widget _buildCard(String count, String label, IconData icon) {
     return Container(
+      width: 250,
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -61,7 +186,7 @@ class HomeFragment extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -166,11 +291,86 @@ extension DecorateContainer on Widget {
       ),
     ];
 
-    return SizedBox(
-      height: 200,
-      child: charts.BarChart(
-        seriesList,
-        animate: true,
+    return Card(
+      elevation: 2,
+      child: Container(
+        padding: const EdgeInsets.all(0),
+        margin: const EdgeInsets.all(5),
+        height: 400,
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: 15, left: 8, right: 8, top: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Performance',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 20,
+                            height: 20,
+                            decoration: const BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                          const Text('Reports')
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            width: 20,
+                            height: 20,
+                            decoration: const BoxDecoration(
+                                color: Colors.yellow,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                          const Text('Student Population')
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            width: 20,
+                            height: 20,
+                            decoration: const BoxDecoration(
+                                color: Colors.red,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                          ),
+                          const Text('SOS Alerts')
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 350,
+              child: charts.BarChart(
+                seriesList,
+                animate: true,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -179,7 +379,7 @@ extension DecorateContainer on Widget {
     return Card(
       elevation: 2,
       child: Container(
-        width: 150,
+        width: 260,
         padding: const EdgeInsets.all(16.0),
         child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -201,7 +401,7 @@ extension DecorateContainer on Widget {
     return Card(
       elevation: 2,
       child: Container(
-        width: 150,
+        width: 260,
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -213,6 +413,14 @@ extension DecorateContainer on Widget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 10),
+            _buildStudentStatus('John Doe', 'BSc. Computer Science', true),
+            const SizedBox(height: 10),
+            _buildStudentStatus('John Doe', 'BSc. Computer Science', true),
+            const SizedBox(height: 10),
+            _buildStudentStatus('John Doe', 'BSc. Computer Science', true),
+            const SizedBox(height: 10),
+            _buildStudentStatus('John Doe', 'BSc. Computer Science', true),
             const SizedBox(height: 10),
             _buildStudentStatus('John Doe', 'BSc. Computer Science', true),
             const SizedBox(height: 10),
@@ -254,7 +462,7 @@ extension DecorateContainer on Widget {
     return Card(
       elevation: 2,
       child: Container(
-        width: 150,
+        width: 260,
         padding: const EdgeInsets.all(16.0),
         child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -289,4 +497,32 @@ class PerformanceData {
 
   PerformanceData(
       this.month, this.reports, this.studentPopulation, this.alerts);
+}
+
+class GoogleMapWidget extends StatefulWidget {
+  const GoogleMapWidget({super.key});
+
+  @override
+  _GoogleMapWidgetState createState() => _GoogleMapWidgetState();
+}
+
+class _GoogleMapWidgetState extends State<GoogleMapWidget> {
+  late GoogleMapController mapController;
+
+  final LatLng _center = const LatLng(-33.8688, 151.2093); // Sydney coordinates
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GoogleMap(
+      onMapCreated: _onMapCreated,
+      initialCameraPosition: CameraPosition(
+        target: _center,
+        zoom: 11.0,
+      ),
+    );
+  }
 }

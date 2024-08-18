@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ReportsFragment extends StatelessWidget {
+  const ReportsFragment({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Reports Fragment'),
     );
   }
