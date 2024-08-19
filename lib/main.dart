@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:slam/pages/admin/admin_dashboard.dart';
+import 'package:slam/pages/splash_screen.dart';
 
 // import 'pages/admin/admin_dashboard.dart';
 import 'app_theme.dart';
-import 'pages/splash_screen.dart';
-import 'pages/welcome_page.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const ProviderScope(child: MyApp()));
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: appTheme,
       debugShowCheckedModeBanner: false,
       title: 'Final year project',
-      home: const SplashScreen(),
+      home: const AdminDashboard(),
+
       // MapScreen(),
       // WelcomePage(),
       // AdminDashboard(),

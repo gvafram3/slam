@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -24,10 +23,6 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     select: false,
   },
-  currentHostel: {
-    type: String,
-    default: undefined,
-  },
   photo: {
     type: String,
     required: [true, "Photo of user is a required field"],
@@ -46,63 +41,36 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Reference number is a required field"],
   },
-  motherName: {
-    type: String,
-    default: undefined,
-  },
-  fatherName: {
-    type: String,
-    default: undefined,
-  },
-  guideanContact: {
-    type: String,
-    default: undefined,
-  },
   gender: {
     type: String,
     enum: ["Male", "Female"],
     required: true,
   },
-  bYear: {
-    type: Number,
-    required: [true, "Please provide birth year"],
-  },
-  bDay: {
-    type: Number,
-    required: [true, "Please provide day"],
-  },
-  bMonth: {
-    type: Number,
-    required: [true, "Please provide month"],
-  },
-  birthCert: {
-    type: String,
-    required: [true, "A scanned copy of birth certificate is required"],
-  },
-  homeTown: {
-    type: String,
-    default: undefined,
-  },
-  criminalRecords: {
-    type: String,
-    default: "none",
-  },
-  shsAttended: {
-    type: String,
+  birthInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "BirthInfo",
     required: true,
+  },
+  locationInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "LocationInfo",
+  },
+  contactInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ContactInfo",
   },
   role: {
     type: String,
     enum: ["student", "admin", "driver"],
     default: "student",
   },
-  otherRecords: {
-    type: String,
-    default: undefined,
-  },
   descriptor: {
     type: Buffer,
     required: true,
+  },
+  schoolInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "SchoolInfo",
   },
 });
 

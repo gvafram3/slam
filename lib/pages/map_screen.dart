@@ -17,7 +17,7 @@ class _MapScreenState extends State<MapScreen> {
 
   static const CameraPosition _initialPosition = CameraPosition(
     target: LatLng(6.672420244953847, -1.5726434686637931),
-    zoom: 10,
+    zoom: 16,
   );
 
   bool _isSelected = false;

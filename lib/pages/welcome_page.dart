@@ -16,7 +16,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   static const CameraPosition _initialPosition = CameraPosition(
     target: LatLng(6.672420244953847, -1.5726434686637931),
-    zoom: 10,
+    zoom: 16,
   );
 
   @override
@@ -86,6 +86,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: GoogleMap(
+                          zoomControlsEnabled: true,
                           initialCameraPosition: _initialPosition,
                           onMapCreated: (GoogleMapController controller) {
                             _controller = controller;
